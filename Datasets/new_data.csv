@@ -1,0 +1,11 @@
+leeftijd,dienstperiode,status_jaar,status_actief,status_beëindigd,reisafstand,uitdienst_reden_Niet van toepassing,uitdienst_reden_Ontslag,aantal_geboortes,afdeling,business_unit
+29.0,5,2018,1,0,53,True,False,"7,8",BI,Detachering
+33.0,6,2016,1,0,50,True,False,"11,9",Accountant,Detachering
+42.0,12,2018,1,0,53,True,False,"10,9",BI,Detachering
+20.0,3,2018,1,0,50,True,False,"11,9",BI,Detachering
+32.0,4,2013,1,0,115,True,False,"10,2",Accountant,Detachering
+41.0,12,2018,1,0,88,True,False,8,Business analist,Detachering
+40.0,10,2015,1,0,112,True,False,"10,1",Business analist,Detachering
+39.0,9,2015,0,1,113,True,False,"8,1",Financial controller,Detachering
+57.0,9,2017,1,0,53,True,False,"10,9",Accountant,Detachering
+90.0,5,2018,1,0,53,True,False,"10,9",Credit controller,Detachering
