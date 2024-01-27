@@ -40,17 +40,17 @@ def generate_data(max_index: int) -> list:
     generated_data: list = []
     for _ in range(max_index):
         generated_data.append(
-            [random_age(), random_reisafstand(), random_afdeling(), random_businessunit(),
+            [random_age(), random_dienstperiode(), random_reisafstand(), random_afdeling(), random_businessunit(),
              random_geboortes()])
     return generated_data
 
 
 if __name__ == '__main__':
-    generated_data: list = generate_data(2000)
-    column_names = ['leeftijd_begin_dienst', 'reisafstand', 'afdeling', 'business_unit', 'aantal_geboortes_pf']
+    generated_data: list = generate_data(50)
+    column_names = ['leeftijd_begin_dienst', 'reisafstand', 'dienstperiode', 'afdeling', 'business_unit', 'aantal_geboortes_pf']
     df: pd.DataFrame = pd.DataFrame(generated_data, columns=column_names)
     df = pd.get_dummies(df, columns=['afdeling', 'business_unit'])
-    df = df[['leeftijd_begin_dienst', 'reisafstand', 'afdeling_Accountant', 'afdeling_BI',
+    df = df[['leeftijd_begin_dienst', 'reisafstand', 'dienstperiode', 'afdeling_Accountant', 'afdeling_BI',
              'afdeling_Boekhouder', 'afdeling_Business analist', 'afdeling_Business controller',
              'afdeling_Financial controller', 'afdeling_IT', 'afdeling_Legal', 'afdeling_Marketing',
              'afdeling_Office manager', 'afdeling_Project controller',
