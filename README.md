@@ -19,7 +19,7 @@ To run the Jupyter notebooks and utilize the turnover prediction algorithm, ensu
 
 -   Python 3.x installed on your system.
 -   Jupyter Notebook installed (you can install it via pip: `pip install jupyter`).
--   Requirement packages (you can insrall it via pip: `pip install -r requirements.txt`).
+-   Requirement packages (you can install it via pip: `pip install -r requirements.txt`).
 
 ## Usage
 
@@ -44,7 +44,7 @@ To run the Jupyter notebooks and utilize the turnover prediction algorithm, ensu
 -   `1_Data_Preprocessing.ipynb`: Data cleaning, handling missing values, and initial exploratory data analysis.
 -   `2_Feature_Engineering.ipynb`: Feature creation, transformation, and selection for model development.
 -   `3_Model_Development.ipynb`: Implementation and training of machine learning algorithms for turnover prediction.
--   `4_Model_Evaluation.ipynb`: Evaluation metrics, model performance assessment, and final analysis.
+-   `4_Model_implementation.ipynb`: Implements the model on a dataset you provide. To use it you must give in the following command `python3 4_Model_implementation.py path/to/csv`. The implementation is not user-friendly yet, so handle with care. The quickest way to test it is with the data_generator script.
 
 ## Deliverables
 
