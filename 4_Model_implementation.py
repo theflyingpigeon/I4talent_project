@@ -17,26 +17,32 @@ def check_file() -> bool:
     # Check if someone passed in a potential filename and if it is a file
     try:
         if os.path.exists(argv[1]):
-            return True
+            if argv[1].lower().endswith('.csv'):
+                return True
+            else:
+                exit('Please use a CSV file')
         else:
             return False
     except IndexError:
         exit('No file has been given!')
 
 
-def check_columns(df: pd.DataFrame) -> pd.DataFrame:
+def check_columns(check_df: pd.DataFrame) -> pd.DataFrame:
     # Check if the dataframe has all the columns
-    df = df.reindex(columns=column_order, fill_value=False)
+    check_df = check_df.reindex(columns=column_order, fill_value=False)
 
     # Remove the dienstperiode column
-    df = df.drop('dienstperiode', axis=1, errors='ignore')
+    check_df = check_df.drop('dienstperiode', axis=1, errors='ignore')
 
-    return df
+    return check_df
 
 
 if __name__ == '__main__':
+    # Check if the file exist
     if not check_file():
         exit("Could not find the provided csv file")
+
+    # Set the df variable equal to all the data in the csv file
     df: pd.DataFrame = pd.read_csv(argv[1])
     df = check_columns(df)
 
@@ -52,6 +58,8 @@ if __name__ == '__main__':
                 'afdeling_HR', 'afdeling_IT', 'afdeling_Legal', 'afdeling_Marketing',
                 'afdeling_Office manager', 'afdeling_Project controller', 'business_unit_Detachering',
                 'business_unit_Intern']
+    df.drop(columns=columns_to_drop, inplace=True, errors='ignore')
 
+    # Save the working period to a csv and Excel file
     df.to_csv(f'Predictions/predicted {datetime.now().day} - {datetime.now().month}.csv', sep=',', index=False)
-    df.to_excel(f'Predictions/predicted.xlsx', sheet_name=f'{datetime.now().day} - {datetime.now().month}')
+    df.to_excel(f'Predictions/predicted.xlsx', sheet_name=f'{datetime.now().day} - {datetime.now().month}', index=False)
