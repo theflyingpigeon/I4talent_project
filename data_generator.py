@@ -47,10 +47,10 @@ def generate_data(max_index: int) -> list:
 
 if __name__ == '__main__':
     generated_data: list = generate_data(50)
-    column_names = ['leeftijd_begin_dienst', 'reisafstand', 'dienstperiode', 'afdeling', 'business_unit', 'aantal_geboortes_pf']
+    column_names = ['leeftijd_begin_dienst', 'dienstperiode', 'reisafstand', 'afdeling', 'business_unit', 'aantal_geboortes_pf']
     df: pd.DataFrame = pd.DataFrame(generated_data, columns=column_names)
     df = pd.get_dummies(df, columns=['afdeling', 'business_unit'])
-    df = df[['leeftijd_begin_dienst', 'reisafstand', 'dienstperiode', 'afdeling_Accountant', 'afdeling_BI',
+    df = df[['leeftijd_begin_dienst', 'dienstperiode', 'reisafstand', 'dienstperiode', 'afdeling_Accountant', 'afdeling_BI',
              'afdeling_Boekhouder', 'afdeling_Business analist', 'afdeling_Business controller',
              'afdeling_Financial controller', 'afdeling_IT', 'afdeling_Legal', 'afdeling_Marketing',
              'afdeling_Office manager', 'afdeling_Project controller',
