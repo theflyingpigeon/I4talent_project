@@ -12,6 +12,8 @@ column_order = ['leeftijd_begin_dienst', 'reisafstand', 'dienstperiode', 'aantal
                 'afdeling_Office manager', 'afdeling_Project controller', 'business_unit_Detachering',
                 'business_unit_Intern']
 
+xlsx_order: list[str] = ['name', 'Predicted working period']
+
 
 def create_input_file() -> None:
     columns: list[str] = ['name']
@@ -25,10 +27,10 @@ def check_file() -> bool:
     # Check if someone passed in a potential filename and if it is a file
     try:
         if os.path.exists(argv[1]):
-            if argv[1].lower().endswith('.csv') or argv[1].lower().endswith('xlsx') or argv[1].lower().endswith('xls'):
+            if argv[1].lower().endswith(('.csv', '.xlsx', '.xls')):
                 return True
             else:
-                exit('Please use a CSV, XLSX or XLS file')
+                exit('Please use a CSV, XLSX or XLS file 2')
         else:
             return False
     except IndexError:
@@ -47,9 +49,6 @@ def check_columns(check_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def run_prediction() -> None:
-    # Set the df variable equal to all the data in the csv file
-    df: pd.DataFrame
-
     # Read the different filetypes
     if argv[1].lower().endswith('csv'):
         df = pd.read_csv(argv[1])
@@ -64,15 +63,14 @@ def run_prediction() -> None:
     xgb_model = pickle.load(open('models/XGBoost.sav', 'rb'))
     predictions = xgb_model.predict(predicted_df)
     predicted_df['Predicted working period'] = predictions
+    predicted_df['Predicted working period'] = predicted_df['Predicted working period'].astype(int)
 
-    try:
-        predicted_df['name'] = df['name']
-    except IndexError:
-        pass
+    # Add the name column to the predicted database
+    predicted_df['name'] = df['name']
 
-    # Remove the unwanted/unneeded cells
+    # Remove the unwanted/unneeded cells and update the column order
     predicted_df.drop(columns=column_order, inplace=True, errors='ignore')
-    predicted_df = predicted_df.reindex(columns=['name', 'Predicted working period'])
+    predicted_df = predicted_df.reindex(columns=xlsx_order)
 
     # Save the working period to a csv and Excel file
     predicted_df.to_csv(f'Predictions/predicted {datetime.now().day} - {datetime.now().month}.csv', sep=',',
@@ -84,7 +82,7 @@ def run_prediction() -> None:
 if __name__ == '__main__':
     if check_file():
         run_prediction()
-    elif argv[1] == '':
+    elif len(argv) == 1:
         create_input_file()
         print("A template has been created")
     else:
